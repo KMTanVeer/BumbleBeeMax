@@ -43,7 +43,10 @@ class GeofenceBroadcastReceiver : BroadcastReceiver() {
         }
 
         geofencingEvent.triggeringGeofences?.forEach { geofence ->
-            val zoneName = geofence.requestId.substringAfter("zone_").replace("_", " ")
+            val zoneName = if (geofence.requestId.contains("zone_"))
+                geofence.requestId.substringAfter("zone_").replace("_", " ")
+            else
+                geofence.requestId
 
             val title   = "Geofence: $zoneName"
             val message = "${securePrefs.deviceLabel} ${transitionLabel.lowercase()}ed zone: $zoneName"

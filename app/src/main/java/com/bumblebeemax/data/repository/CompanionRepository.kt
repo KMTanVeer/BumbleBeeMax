@@ -66,7 +66,7 @@ class CompanionRepository @Inject constructor(
     // ── Smart Suggestions ─────────────────────────────────────────────
 
     suspend fun generateDailySummary(deviceId: String, screenTimeMs: Long) {
-        val hours = screenTimeMs / 3_600_000
+        val hours = screenTimeMs / MS_PER_HOUR
         val message = when {
             hours >= 6 -> "You've used your phone for over ${hours}h today. Consider a digital detox!"
             hours >= 3 -> "About ${hours}h of screen time today. You're on track."
@@ -87,5 +87,9 @@ class CompanionRepository @Inject constructor(
             .setAutoCancel(true)
             .build()
         nm.notify(System.currentTimeMillis().toInt(), notification)
+    }
+
+    companion object {
+        private const val MS_PER_HOUR = 3_600_000L
     }
 }

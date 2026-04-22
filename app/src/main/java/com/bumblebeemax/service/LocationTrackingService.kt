@@ -5,6 +5,7 @@ import android.app.Notification
 import android.app.PendingIntent
 import android.content.Intent
 import android.location.Geocoder
+import android.os.Build
 import android.os.IBinder
 import android.os.Looper
 import androidx.core.app.NotificationCompat
@@ -79,9 +80,17 @@ class LocationTrackingService : LifecycleService() {
     private fun resolveAddress(lat: Double, lng: Double): String {
         return runCatching {
             val geocoder = Geocoder(this, Locale.getDefault())
-            @Suppress("DEPRECATION")
-            val addresses = geocoder.getFromLocation(lat, lng, 1)
-            addresses?.firstOrNull()?.getAddressLine(0) ?: ""
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                var result = ""
+                geocoder.getFromLocation(lat, lng, 1) { addresses ->
+                    result = addresses.firstOrNull()?.getAddressLine(0) ?: ""
+                }
+                result
+            } else {
+                @Suppress("DEPRECATION")
+                val addresses = geocoder.getFromLocation(lat, lng, 1)
+                addresses?.firstOrNull()?.getAddressLine(0) ?: ""
+            }
         }.getOrDefault("")
     }
 

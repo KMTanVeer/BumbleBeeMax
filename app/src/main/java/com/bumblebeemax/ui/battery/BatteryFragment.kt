@@ -42,15 +42,12 @@ class BatteryFragment : Fragment() {
             }
         }
 
-        viewModel.loadHistory()
-
-        // Render battery history chart when history is ready
-        // (history is loaded in ViewModel init; observe via a simple post-delay workaround)
-        binding.root.post { renderChart() }
+        viewModel.history.observe(viewLifecycleOwner) { history ->
+            renderChart(history)
+        }
     }
 
-    private fun renderChart() {
-        val history = viewModel.history
+    private fun renderChart(history: List<BatteryInfo>) {
         if (history.isEmpty()) return
 
         val entries = history.mapIndexed { idx, info ->

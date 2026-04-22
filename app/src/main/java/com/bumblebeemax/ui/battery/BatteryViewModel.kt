@@ -1,6 +1,7 @@
 package com.bumblebeemax.ui.battery
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.bumblebeemax.data.model.BatteryInfo
@@ -18,8 +19,8 @@ class BatteryViewModel @Inject constructor(
 
     val latestBattery: LiveData<BatteryInfo?> = repository.getLatest(securePrefs.deviceId)
 
-    private var _history: List<BatteryInfo> = emptyList()
-    val history: List<BatteryInfo> get() = _history
+    private val _history = MutableLiveData<List<BatteryInfo>>(emptyList())
+    val history: LiveData<List<BatteryInfo>> get() = _history
 
     init {
         loadHistory()
@@ -27,7 +28,7 @@ class BatteryViewModel @Inject constructor(
 
     fun loadHistory() {
         viewModelScope.launch {
-            _history = repository.getRecent(securePrefs.deviceId, 48)
+            _history.value = repository.getRecent(securePrefs.deviceId, 48)
         }
     }
 }

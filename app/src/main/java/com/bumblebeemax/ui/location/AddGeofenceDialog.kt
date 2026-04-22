@@ -32,6 +32,20 @@ class AddGeofenceDialog(
                     val lat    = latStr.toDouble()
                     val lng    = lngStr.toDouble()
                     val radius = radStr.toFloat()
+
+                    if (lat < -90 || lat > 90) {
+                        Toast.makeText(requireContext(), "Latitude must be between -90 and 90", Toast.LENGTH_SHORT).show()
+                        return@setPositiveButton
+                    }
+                    if (lng < -180 || lng > 180) {
+                        Toast.makeText(requireContext(), "Longitude must be between -180 and 180", Toast.LENGTH_SHORT).show()
+                        return@setPositiveButton
+                    }
+                    if (radius <= 0) {
+                        Toast.makeText(requireContext(), "Radius must be greater than 0", Toast.LENGTH_SHORT).show()
+                        return@setPositiveButton
+                    }
+
                     onAdd(name, lat, lng, radius, binding.cbEnter.isChecked, binding.cbExit.isChecked)
                 }.onFailure {
                     Toast.makeText(requireContext(), "Invalid coordinates", Toast.LENGTH_SHORT).show()
