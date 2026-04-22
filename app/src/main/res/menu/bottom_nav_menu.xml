@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/dashboardFragment"
+        android:icon="@drawable/ic_dashboard"
+        android:title="Home" />
+    <item
+        android:id="@+id/batteryFragment"
+        android:icon="@drawable/ic_battery"
+        android:title="Battery" />
+    <item
+        android:id="@+id/locationFragment"
+        android:icon="@drawable/ic_location"
+        android:title="Location" />
+    <item
+        android:id="@+id/usageFragment"
+        android:icon="@drawable/ic_usage"
+        android:title="Usage" />
+    <item
+        android:id="@+id/companionFragment"
+        android:icon="@drawable/ic_companion"
+        android:title="Companion" />
+    <item
+        android:id="@+id/settingsFragment"
+        android:icon="@drawable/ic_settings"
+        android:title="Settings" />
+</menu>
