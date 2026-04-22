@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/dashboardFragment">
+
+    <fragment
+        android:id="@+id/dashboardFragment"
+        android:name="com.bumblebeemax.ui.dashboard.DashboardFragment"
+        android:label="Dashboard" />
+
+    <fragment
+        android:id="@+id/batteryFragment"
+        android:name="com.bumblebeemax.ui.battery.BatteryFragment"
+        android:label="Battery" />
+
+    <fragment
+        android:id="@+id/locationFragment"
+        android:name="com.bumblebeemax.ui.location.LocationFragment"
+        android:label="Location" />
+
+    <fragment
+        android:id="@+id/usageFragment"
+        android:name="com.bumblebeemax.ui.usage.UsageFragment"
+        android:label="Usage" />
+
+    <fragment
+        android:id="@+id/companionFragment"
+        android:name="com.bumblebeemax.ui.companion.CompanionFragment"
+        android:label="Companion" />
+
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.bumblebeemax.ui.settings.SettingsFragment"
+        android:label="Settings" />
+
+</navigation>
